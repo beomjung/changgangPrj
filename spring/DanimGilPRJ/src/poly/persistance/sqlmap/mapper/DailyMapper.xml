@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="poly.persistance.mapper.IDailyMapper">
+
+<insert id="setDailyList" parameterType="DailyDTO">
+	INSERT INTO 
+		DAILY_SAL(
+			NO,
+			DATE,
+			ITEM,
+			PRICE,
+			QUANTITY,
+			KIND
+			)
+		VALUES(
+			#{sal_no},
+			#{sal_date},
+			#{sal_item},
+			#{sal_price},
+			#{sal_quantity},
+			#{sal_kind}
+			)
+		ON DUPLICATE KEY UPDATE 
+		NO = VALUES(NO),
+		DATE = VALUES(DATE),
+		ITEM = VALUES(ITEM),
+		PRICE = VALUES(PRICE),
+		QUANTITY = VALUES(QUANTITY),
+		KIND = VALUES(KIND)
+</insert>
+</mapper>
