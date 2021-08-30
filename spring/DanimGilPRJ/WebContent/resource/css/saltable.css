@@ -5,6 +5,7 @@ div.minimalistBlack {
 	width: 100%;
 	text-align: center;
 	border-collapse: collapse;
+	overflow: auto;
 }
 
 .divTable.minimalistBlack .divTableCell, .divTable.minimalistBlack .divTableHead, #sal_no
