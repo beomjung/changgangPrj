@@ -177,7 +177,7 @@
 			<div class="container-fluid mt-3">
 				<div class="row">
 					<div class="col-lg-12">
-						<div class="card">
+						<div class="card" style="overflow: scorll;">
 							<div class="card-body">
 								<div class="active-member">
 									<div class="table-responsive">
@@ -189,10 +189,11 @@
 
 												</div>
 											</div>
+											<input type="button" value="추가" id="addRow">
 											<form action="/main/Daily_UPDATEProc.do">
 												<input type="button" value="저장" id="UpdateDailyInfo">
-												<input type="button" value="추가" onclick='addRow()' />
-												
+
+
 												<div class="divTable minimalistBlack">
 													<div class="divTableHeading">
 														<div class="divTableRow">
@@ -208,25 +209,27 @@
 															<div class="divTableHead"></div>
 														</div>
 													</div>
-													<div class="divTableBody" id="sal_body">
+													<div class="divTableBody" id="sal_body" name="sal_body">
 
 														<%
 														for (int i = 1; i <= 10; i++) {
 														%>
-														<div class="divTableRow" id="sal_row">
+														<div class="divTableRow" id="sal_row" name="sal_row">
 															<div class="divTableCell" id="sal_ch" name="sal_ch">
 																<input type="checkbox">
 															</div>
-															<div  class="divTableCell" id="sal_no" name="sal_no">
-															<span><%=i %></span><input type="hidden" value=<%=i%> class="makeArrayElem"></div>
+															<div class="divTableCell" id="sal_no" name="sal_no">
+																<span><%=i%></span><input type="hidden" value=<%=i%>
+																	class="makeArrayElem">
+															</div>
 															<div class="divTableCell" id="sal_date" name="sal_date">
 																<input type="date" class="makeArrayElem">
 															</div>
 															<div class="divTableCell" id="sal_item" name="sal_item">
 																<input type="text" class="makeArrayElem">
 															</div>
-															<div class="divTableCell"  name="sal_price">
-																<input type="text" id="sal_price" class="makeArrayElem">
+															<div class="divTableCell" id="sal_price" name="sal_price">
+																<input type="text" class="makeArrayElem">
 															</div>
 															<div class="divTableCell" id="sal_quantity"
 																name="sal_quantity">
@@ -239,19 +242,17 @@
 																	<option>배달앱</option>
 																</select>
 															</div>
+															<div class="divTableCell" id="delete" name="delete">
+																<a href="#" data-toggle="tooltip" data-placement="top"
+																	title="" data-original-title="Close"><i
+																	class="fa fa-close color-danger" id ="rowdelete"></i></a>
+															</div>
 														</div>
+														<input type="hidden" value=",">
 														<%
 														}
 														%>
 
-													</div>
-													<div class="divTableFoot tableFootStyle">
-														<div class="divTableRow">
-															<div class="divTableCell">foot1</div>
-															<div class="divTableCell">foot2</div>
-															<div class="divTableCell">foot3</div>
-															<div class="divTableCell">foot4</div>
-														</div>
 													</div>
 												</div>
 											</form>
@@ -322,6 +323,7 @@
 															</select>
 														</div>
 													</div>
+
 													<%
 													}
 													%>
@@ -402,7 +404,7 @@
 		src="../resource/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
 	<script src="../resource/js/dashboard/dashboard-1.js"></script>
 
-<script>
+	<script>
     //요소에서 값을 추출하여 배열로 리턴하는 함수
     function makeArray(){
         let arr = new Array();
@@ -433,18 +435,22 @@
         })
     })
     
-    function addRow() {
-        var sal_tbody = document.getElementById('sal_body');
- 
-        // var row = my_tbody.insertRow(0); // 상단에 추가
-        var row = sal_tbody.insertRow( sal_body.rows.length ); // 하단에 추가
-        console.log(row);
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        cell1.innerHTML = 'HELLO world';
-        cell2.innerHTML = new Date().toUTCString();
-      }
-</script>
+//행 추가 버튼 클릭시 행추가
+$("#addRow").on("click", ()=>{
+	let row0= document.getElementById("sal_body").innerHTML;	
+	let arry = new Array();
+	arry = row0.split(',');
+	console.log(arry[0]);
+	
+	$("#sal_body").append(arry[0]);	
+});
+    
+
+    
+
+    </script>
+
+
 </body>
 
 </html>
